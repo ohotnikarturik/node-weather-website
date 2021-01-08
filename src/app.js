@@ -4,6 +4,8 @@ const hbs = require("hbs");
 
 const app = express();
 
+const forecast = require('./utils/forecast')
+
 // Define path for express config
 const publicDirectoryPath = path.join(__dirname, "../public");
 const viewsPath = path.join(__dirname, "../templates/views");
@@ -40,7 +42,19 @@ app.get("/help", (req, res) => {
 });
 
 app.get("/weather", (req, res) => {
-  res.send({ location: "Espoo", forecast: "Mess" });
+  if (!req.query.address) {
+    return res.send({ error: "You must to provide an address!" });
+  }
+  
+  forecast(req.query.address, (error, forecastData) => {
+    if(error) {
+      return res.send({error})
+    }
+
+    
+    res.send({ data: forecastData, address: req.query.address});
+  })
+
 });
 
 app.get("/help/*", (req, res) => {
