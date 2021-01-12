@@ -4,9 +4,9 @@
 
 ##### demo: https://ohotnikarturik-weather-website.herokuapp.com/
 
-##### To start use Weather website on your machine:
+#### To start to use Weather-website on your machine:
 
-- Clone app
+- Clone the app
 - `npm install`
 - `npm run dev`
 
